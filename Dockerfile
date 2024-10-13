@@ -10,7 +10,8 @@ LABEL fly_launch_runtime="Remix"
 WORKDIR /app
 
 # Set production environment
-ENV NODE_ENV="production"
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 
 
 # Throw-away build stage to reduce size of final image
@@ -31,7 +32,9 @@ COPY . .
 RUN npm run build
 
 # Remove development dependencies
-RUN npm prune --omit=dev
+RUN if [ "$NODE_ENV" = "production" ]; then \
+    npm prune --omit-dev; \
+    fi
 
 
 # Final stage for app image
