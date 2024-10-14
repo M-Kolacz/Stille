@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1000" height="1000"><style>
+    #light-icon {
+      display: inline;
+    }
+    #dark-icon {
+      display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      #light-icon {
+        display: none;
+      }
+      #dark-icon {
+        display: inline;
+      }
+    }
+  </style><g id="light-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1309)"><rect width="1000" height="1000" fill="#ffffff"></rect><g transform="matrix(2.9411764705882355,0,0,2.9411764705882355,150.00005958711398,167.02379518396714)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="238" height="227"><svg width="238" height="227" viewBox="0 0 238 227" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        path {
+            fill: #0E1A5A;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            path {
+                fill: #233dce;
+            }
+        }
+    </style>
+
+    <path d="M119 0L147.064 86.3729H237.882L164.409 139.754L192.473 226.127L119 172.746L45.5268 226.127L73.5911 139.754L0.117935 86.3729H90.9358L119 0Z" fill="#0E1A5A"></path>
+</svg></svg></g></g><defs><clipPath id="SvgjsClipPath1309"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs></svg></g><g id="dark-icon"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1310)"><rect width="1000" height="1000" fill="#ffffff"></rect><g transform="matrix(2.9411764705882355,0,0,2.9411764705882355,150.00005958711398,167.02379518396714)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="238" height="227"><svg width="238" height="227" viewBox="0 0 238 227" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        path {
+            fill: #0E1A5A;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            path {
+                fill: #233dce;
+            }
+        }
+    </style>
+
+    <path d="M119 0L147.064 86.3729H237.882L164.409 139.754L192.473 226.127L119 172.746L45.5268 226.127L73.5911 139.754L0.117935 86.3729H90.9358L119 0Z" fill="#0E1A5A"></path>
+</svg></svg></g></g><defs><clipPath id="SvgjsClipPath1310"><rect width="1000" height="1000" x="0" y="0" rx="350" ry="350"></rect></clipPath></defs></svg></g></svg>
