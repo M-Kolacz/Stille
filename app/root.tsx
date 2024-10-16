@@ -46,8 +46,6 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheet },
 ];
 
-console.log(faviconSvg);
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
