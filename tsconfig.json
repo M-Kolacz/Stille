@@ -21,9 +21,11 @@
     "allowJs": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
     "baseUrl": ".",
+    "allowImportingTsExtensions": true,
     "paths": {
-      "~/*": ["./app/*"]
+      "#app/*": ["./app/*"]
     },
 
     // Vite takes care of building everything, not tsc.
