@@ -13,6 +13,13 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
+      - name: 👀 Read app name
+        uses: SebRollen/toml-action@v1.2.0
+        id: app_name
+        with:
+          file: "fly.toml"
+          field: "app"
+
       - name: 🎈 Setup Fly
         uses: superfly/flyctl-actions/setup-flyctl@master
 
