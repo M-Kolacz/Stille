@@ -6,43 +6,66 @@ FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Remix"
 
-# Remix app lives here
-WORKDIR /app
-
 # Set production environment
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
+# Install all node_modules, including dev dependencies
+FROM base as deps
+
+# Remix app lives here
+WORKDIR /app
+
 # Install node modules
-COPY .npmrc package-lock.json package.json ./
+ADD package.json package-lock.json .npmrc ./
 RUN npm ci --include=dev
 
-# Copy application code
-COPY . .
+# Setup production node_modules
+FROM base as production-deps
 
-# Build application
-RUN npm run build
+WORKDIR /myapp
+
+COPY --from=deps /myapp/node_modules /myapp/node_modules
+ADD package.json package-lock.json .npmrc ./
 
 # Remove development dependencies
 RUN if [ "$NODE_ENV" = "production" ]; then \
     npm prune --omit-dev; \
     fi
 
+# Build the app
+FROM base as build
 
-# Final stage for app image
+ARG COMMIT_SHA
+ENV COMMIT_SHA=$COMMIT_SHA
+
+WORKDIR /myapp
+
+COPY --from=deps /myapp/node_modules /myapp/node_modules
+
+ADD . .
+
+RUN npm run build
+
+# Finally, build the production image with minimal footprint
 FROM base
 
-# Copy built application
-COPY --from=build /app /app
+WORKDIR /myapp
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+RUN INTERNAL_COMMAND_TOKEN=$(openssl rand -hex 32) && \
+    echo "INTERNAL_COMMAND_TOKEN=$INTERNAL_COMMAND_TOKEN" > .env
+
+COPY --from=production-deps /myapp/node_modules /myapp/node_modules
+
+COPY --from=build /myapp/server-build /myapp/server-build
+COPY --from=build /myapp/build /myapp/build
+COPY --from=build /myapp/package.json /myapp/package.json
+
+ADD . . 
+
+CMD ["npm","run","start"]
