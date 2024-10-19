@@ -49,8 +49,6 @@ RUN npm run build
 # Finally, build the production image with minimal footprint
 FROM base
 
-ENV INTERNAL_PORT="8080"
-ENV PORT="8081"
 ENV NODE_ENV="production"
 
 WORKDIR /myapp
