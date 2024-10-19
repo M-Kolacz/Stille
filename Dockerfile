@@ -23,7 +23,7 @@ WORKDIR /app
 
 # Install node modules
 ADD package.json package-lock.json .npmrc ./
-RUN npm ci --include=dev
+RUN npm install --include=dev
 
 # Setup production node_modules
 FROM base as production-deps
@@ -34,9 +34,7 @@ COPY --from=deps /myapp/node_modules /myapp/node_modules
 ADD package.json package-lock.json .npmrc ./
 
 # Remove development dependencies
-RUN if [ "$NODE_ENV" = "production" ]; then \
-    npm prune --omit-dev; \
-    fi
+RUN npm prune --omit=dev
 
 # Build the app
 FROM base as build
