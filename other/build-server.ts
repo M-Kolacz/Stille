@@ -10,7 +10,7 @@ const packageJson = fsExtra.readJsonSync(
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const here = (...s: Array<string>) => path.join(__dirname, ...s);
-const globsafe = (s: string) => s.replace(/\*/g, "_");
+const globsafe = (s: string) => s.replace(/\\/g, "/");
 
 const allFiles = globSync(globsafe(here("../server/**/*.*")), {
   ignore: [
