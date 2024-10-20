@@ -19,6 +19,8 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@fontsource-variable/roboto-condensed": "^5.1.0",
+    "@fontsource/roboto": "^5.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@remix-run/node": "^2.12.1",
     "@remix-run/react": "^2.12.1",

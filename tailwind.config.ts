@@ -7,7 +7,17 @@ export default {
     extend: {
       fontFamily: {
         sans: [
-          "Inter",
+          "Roboto",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji",
+        ],
+        heading: [
+          "Roboto Condensed Variable",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
