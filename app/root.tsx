@@ -13,6 +13,7 @@ import faviconIco from "./assets/favicon.ico?url";
 import faviconAppleTouchIcon from "./assets/apple-touch-icon.png?url";
 import webManifest from "./assets/site.webmanifest?url";
 
+import fontStylesheet from "./styles/font.css?url";
 import tailwindStylesheet from "./styles/tailwind.css?url";
 
 export const meta: MetaFunction = () => [
@@ -32,17 +33,7 @@ export const links: LinksFunction = () => [
   { rel: "apple-touch-icon", sizes: "180x180", href: faviconAppleTouchIcon },
   { rel: "manifest", href: webManifest },
   // ---
-
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
+  { rel: "stylesheet", href: fontStylesheet },
   { rel: "stylesheet", href: tailwindStylesheet },
 ];
 
