@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'stille-sewh8dpp1sfhhbxelxygac-staging'
+app = 'stille-sewh8dpp1sfhhbxelxygac'
 primary_region = 'waw'
 kill_signal = "SIGINT"
 kill_timeout = 5
