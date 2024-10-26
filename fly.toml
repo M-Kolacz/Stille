@@ -5,6 +5,10 @@
 
 app = 'stille-sewh8dpp1sfhhbxelxygac'
 primary_region = 'waw'
+kill_timeout = 5
+
+[experimental]
+auto_rollback = true
 
 [build]
 
@@ -18,6 +22,26 @@ processes = ['app']
 
 [[vm]]
 size = 'shared-cpu-1x'
+
+[[services]]
+internal_port = 8080
+processes = ["app"]
+protocol = "tcp"
+script_checks = []
+
+[services.concurrency]
+hard_limit = 100
+soft_limit = 80
+type = "requests"
+
+[[services.ports]]
+handlers = ["http"]
+port = 80
+force_https = true
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
 
 [[services.tcp_checks]]
 grace_period = "1s"
