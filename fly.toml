@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'stille-sewh8dpp1sfhhbxelxygac'
+app = 'stille-sewh8dpp1sfhhbxelxygac-staging'
 primary_region = 'waw'
 kill_signal = "SIGINT"
 kill_timeout = 5
@@ -15,11 +15,11 @@ size = 'shared-cpu-1x'
 auto_rollback = true
 
 [[services]]
-internal_port = 8080
+internal_port = 3000
 processes = ["app"]
 protocol = "tcp"
 script_checks = []
-auto_stop_machines = "stop"
+auto_stop_machines = 'stop'
 auto_start_machines = true
 min_machines_running = 0
 
@@ -27,6 +27,11 @@ min_machines_running = 0
 hard_limit = 100
 soft_limit = 80
 type = "requests"
+
+[http_service.concurrency]
+type = "requests"
+soft_limit = 80
+hard_limit = 100
 
 [[services.ports]]
 handlers = ["http"]
