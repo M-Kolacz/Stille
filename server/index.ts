@@ -192,7 +192,9 @@ const getBuild = async () => {
   try {
     const build = viteDevServer
       ? await viteDevServer.ssrLoadModule("virtual:remix/server-build")
-      : await import("../build/server/index.js");
+      : // @ts-expect-error - the file might not exist yet but it will
+				// eslint-disable-next-line import/no-unresolved 
+      await import("../build/server/index.js");
 
     return { build: build as unknown as ServerBuild, error: null };
   } catch (error) {

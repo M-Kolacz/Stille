@@ -1,20 +1,23 @@
+import  { type LinksFunction, type MetaFunction } from "@remix-run/node";
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
 
-import faviconPng from "./assets/favicon-48x48.png?url";
-import faviconSvg from "./assets/favicon.svg?url";
-import faviconIco from "./assets/favicon.ico?url";
 import faviconAppleTouchIcon from "./assets/apple-touch-icon.png?url";
+import faviconPng from "./assets/favicon-48x48.png?url";
+import faviconIco from "./assets/favicon.ico?url";
+import faviconSvg from "./assets/favicon.svg?url";
 import webManifest from "./assets/site.webmanifest?url";
 
 import fontStylesheet from "./styles/font.css?url";
 import tailwindStylesheet from "./styles/tailwind.css?url";
+
+import { getEnv } from "./utils/env.server";
 
 export const meta: MetaFunction = () => [
   { name: "apple-mobile-web-app-title", content: "Stille" },
@@ -37,7 +40,14 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheet },
 ];
 
+export const loader = () => {
+  return {
+    ENV: getEnv(),
+  };
+};
+
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { ENV } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -48,6 +58,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="h-[300dvh]">
         {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV=${JSON.stringify(ENV)}`,
+          }}
+        />
         <ScrollRestoration getKey={(location) => location.pathname} />
         <Scripts />
       </body>
