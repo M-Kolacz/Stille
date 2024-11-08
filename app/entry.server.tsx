@@ -6,13 +6,16 @@
 
 import { PassThrough } from "node:stream";
 
-import type { AppLoadContext, EntryContext } from "@remix-run/node";
-import { createReadableStreamFromReadable } from "@remix-run/node";
+import  { type AppLoadContext, type EntryContext , createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import { init, getEnv } from "./utils/env.server";
 
 const ABORT_DELAY = 5_000;
+
+init();
+global.ENV = getEnv();
 
 export default function handleRequest(
   request: Request,
