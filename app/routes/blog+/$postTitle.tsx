@@ -1,4 +1,5 @@
 import { type MetaFunction, useParams } from "@remix-run/react";
+import { GeneralErrorBoundary } from "#app/components/error-boundary";
 
 export const meta: MetaFunction = ({ params }) => {
   const postTitle = params.postTitle;
@@ -14,3 +15,5 @@ export default function BlogPost() {
 
   return <h1>{params.postTitle ?? "Blog Post Title"}</h1>;
 }
+
+export const ErrorBoundary = () => <GeneralErrorBoundary />;
