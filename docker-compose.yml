@@ -1,7 +1,7 @@
 services:
   stille:
     build:
-      context: ./ 
+      context: ./
       args:
         - NODE_ENV=development
     command: npm run dev
@@ -9,7 +9,7 @@ services:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
     ports:
-      - '5173:5173'
+      - "5173:5173"
     volumes:
       - ./:/app
       - /app/node_modules
