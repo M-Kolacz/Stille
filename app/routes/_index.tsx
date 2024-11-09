@@ -1,4 +1,4 @@
-import  { type MetaFunction } from "@remix-run/node";
+import { type MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { Button } from "#app/components/ui/button";
 
@@ -8,7 +8,6 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Welcome to Stille!" },
   ];
 };
-
 
 export default function Index() {
   console.log(ENV.MODE);
