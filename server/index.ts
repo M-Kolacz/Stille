@@ -274,7 +274,7 @@ closeWithGrace(async ({ err }) => {
     server.close((e) => (e ? reject(e) : resolve("ok")));
   });
   if (err) {
-    console.error(chalk.red(err));
-    console.error(chalk.red(err.stack));
+    console.error("🛑", chalk.red(err));
+    console.error("🛑", chalk.red(err.stack));
   }
 });

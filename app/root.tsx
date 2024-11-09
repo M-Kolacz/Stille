@@ -18,6 +18,7 @@ import fontStylesheet from "./styles/font.css?url";
 import tailwindStylesheet from "./styles/tailwind.css?url";
 
 import { getEnv } from "./utils/env.server";
+import { GeneralErrorBoundary } from "./components/error-boundary";
 
 export const meta: MetaFunction = () => [
   { name: "apple-mobile-web-app-title", content: "Stille" },
@@ -47,7 +48,6 @@ export const loader = () => {
 };
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { ENV } = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -58,11 +58,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="h-[300dvh]">
         {children}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV=${JSON.stringify(ENV)}`,
-          }}
-        />
         <ScrollRestoration getKey={(location) => location.pathname} />
         <Scripts />
       </body>
@@ -71,5 +66,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const { ENV } = useLoaderData<typeof loader>();
+  return (
+    <>
+      <Outlet />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.ENV=${JSON.stringify(ENV)}`,
+        }}
+      />
+    </>
+  );
 }
+
+export const ErrorBoundary = () => <GeneralErrorBoundary />;
