@@ -1,4 +1,12 @@
+import { type MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+
+export const meta:MetaFunction = () => {
+  return [
+    { title: "Stille | Blog" },
+    { name: "description", content: "Stille blog" },
+  ];
+}
 
 export default function HomePage() {
   return (

@@ -4,10 +4,11 @@ import { Button } from "#app/components/ui/button";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Stille" },
+    { name: "description", content: "Welcome to Stille!" },
   ];
 };
+
 
 export default function Index() {
   console.log(ENV.MODE);
