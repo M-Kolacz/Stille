@@ -2,12 +2,14 @@ import { vitePlugin as remix } from "@remix-run/dev";
 import { flatRoutes } from "remix-flat-routes";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import mdx from "@mdx-js/rollup";
 
 export default defineConfig({
   build: {
     assetsInlineLimit: 0,
   },
   plugins: [
+    mdx(),
     remix({
       ignoredRouteFiles: ["**/*"],
       serverModuleFormat: "esm",
