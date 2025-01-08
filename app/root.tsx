@@ -1,12 +1,5 @@
-import { type LinksFunction, type MetaFunction } from "@remix-run/node";
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from "@remix-run/react";
+import { type LinksFunction, type MetaFunction } from "react-router";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "react-router";
 
 import faviconAppleTouchIcon from "./assets/apple-touch-icon.png?url";
 import faviconPng from "./assets/favicon-48x48.png?url";

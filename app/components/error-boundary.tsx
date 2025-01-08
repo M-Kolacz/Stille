@@ -5,7 +5,8 @@ import {
   Params,
   useParams,
   useRouteError,
-} from "@remix-run/react";
+} from "react-router";
+import { JSX } from "react/jsx-runtime";
 
 type StatusHandler = (info: {
   error: ErrorResponse;

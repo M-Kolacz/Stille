@@ -1,5 +1,5 @@
 import { GeneralErrorBoundary } from "#app/components/error-boundary.tsx";
-import { LoaderFunction } from "@remix-run/node";
+import { LoaderFunction } from "react-router";
 
 export const loader: LoaderFunction = () => {
   throw new Response("Page not found", { status: 404 });

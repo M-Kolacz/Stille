@@ -1,5 +1,5 @@
-import { type MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import { type MetaFunction } from "react-router";
+import { Link } from "react-router";
 import { Button } from "#app/components/ui/button";
 
 export const meta: MetaFunction = () => {
