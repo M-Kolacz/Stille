@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
-import { createRequestHandler } from "@remix-run/express";
-import { type ServerBuild } from "@remix-run/node";
+import { createRequestHandler } from "@react-router/express";
+import { type ServerBuild } from "react-router";
 import { ip as ipAddress } from "address";
 import chalk from "chalk";
 import closeWithGrace from "close-with-grace";
@@ -191,10 +191,8 @@ app.use((req, res, next) => {
 const getBuild = async () => {
   try {
     const build = viteDevServer
-      ? await viteDevServer.ssrLoadModule("virtual:remix/server-build")
-      : // @ts-expect-error - the file might not exist yet but it will
-        // eslint-disable-next-line import/no-unresolved
-        await import("../build/server/index.js");
+      ? await viteDevServer.ssrLoadModule("virtual:react-router/server-build")
+      : await import("../build/server/index.js");
 
     return { build: build as unknown as ServerBuild, error: null };
   } catch (error) {

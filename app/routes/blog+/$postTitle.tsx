@@ -1,4 +1,4 @@
-import { type MetaFunction, useParams } from "@remix-run/react";
+import { type MetaFunction, useParams } from "react-router";
 import { GeneralErrorBoundary } from "#app/components/error-boundary";
 
 export const meta: MetaFunction = ({ params }) => {
