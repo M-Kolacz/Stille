@@ -1,5 +1,14 @@
 import { type LinksFunction, type MetaFunction } from "react-router";
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "react-router";
+import {
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "react-router";
+
+import { Header, Footer } from "#app/components/organisms";
 
 import faviconAppleTouchIcon from "./assets/apple-touch-icon.png?url";
 import faviconPng from "./assets/favicon-48x48.png?url";
@@ -49,8 +58,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="h-[300dvh]">
-        {children}
+      <body className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow container mx-auto px-4 py-8">
+          {children}
+        </main>
+        <Footer />
         <ScrollRestoration getKey={(location) => location.pathname} />
         <Scripts />
       </body>
