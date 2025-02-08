@@ -2,7 +2,7 @@
   <img src="./app/assets/stille.jpg" alt="Ence Pence Logo" width="200" />
 </p>
 
-<p align="center"><strong>ADD HERE SHORT TITLE ABOUT THE PROJECT</strong></p>
+<p align="center"><strong> A reflection of my IT experiences, projects, and personal growth.</strong></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/node-v20.18.0-brightgreen.svg?style=flat-square" alt="Node.js Version" />
@@ -17,7 +17,7 @@
 
 # Stille 🐦
 
-DESCRIPTION OF THE PROEJCT
+Stille is a platform where I document my journey in IT. It serves as a space to share my experiences, insights, and projects while reflecting on my growth in the field. The technology stack draws inspiration from the [Epic Stack](https://github.com/epicweb-dev/epic-stack), developed by [Kent C. Dodds](https://kentcdodds.com/) and his [incredible community](<(https://github.com/epicweb-dev/epic-stack/graphs/contributors)>). As the project is still in its early stages, you can expect regular updates and new content.
 
 - 🌐 [**Live Site**](https://stille-sewh8dpp1sfhhbxelxygac-staging.fly.dev/)
 - 🎨 [**Figma Design**](https://www.figma.com/design/cvFJXCo3gHwhHySu3OcEO6/Untitled?node-id=0-1&t=ehGdsTEz3caLATry-1)
