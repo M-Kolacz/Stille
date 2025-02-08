@@ -11,7 +11,7 @@ import {
 import { Header, Footer } from "#app/components/organisms";
 
 import faviconAppleTouchIcon from "./assets/apple-touch-icon.png?url";
-import faviconPng from "./assets/favicon-48x48.png?url";
+import faviconPng from "./assets/favicon-96x96.png?url";
 import faviconIco from "./assets/favicon.ico?url";
 import faviconSvg from "./assets/favicon.svg?url";
 import webManifest from "./assets/site.webmanifest?url";
@@ -32,7 +32,7 @@ export const links: LinksFunction = () => [
     rel: "icon",
     type: "image/png",
     href: faviconPng,
-    sizes: "48x48",
+    sizes: "96x96",
   },
   { rel: "icon", type: "image/svg+xml", href: faviconSvg },
   { rel: "shortcut icon", href: faviconIco },
