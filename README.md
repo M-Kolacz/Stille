@@ -20,6 +20,7 @@
 Stille is a platform where I document my journey in IT. It serves as a space to share my experiences, insights, and projects while reflecting on my growth in the field. The technology stack draws inspiration from the [Epic Stack](https://github.com/epicweb-dev/epic-stack), developed by [Kent C. Dodds](https://kentcdodds.com/) and his [incredible community](<(https://github.com/epicweb-dev/epic-stack/graphs/contributors)>). As the project is still in its early stages, you can expect regular updates and new content.
 
 - 🌐 [**Live Site**](https://stille-sewh8dpp1sfhhbxelxygac-staging.fly.dev/)
+- 📚 [**Storybook**](https://m-kolacz.github.io/stille/) (not ready yet)
 - 🎨 [**Figma Design**](https://www.figma.com/design/cvFJXCo3gHwhHySu3OcEO6/Untitled?node-id=0-1&t=ehGdsTEz3caLATry-1)
 
 ## Tech Stack 💻
