@@ -1,40 +1,74 @@
-# Welcome to Remix!
+<p align="center">
+  <img src="./app/assets/stille.jpg" alt="Ence Pence Logo" width="200" />
+</p>
 
-- 📖 [Remix docs](https://remix.run/docs)
+<p align="center"><strong>ADD HERE SHORT TITLE ABOUT THE PROJECT</strong></p>
 
-## Development
+<p align="center">
+  <img src="https://img.shields.io/badge/node-v20.18.0-brightgreen.svg?style=flat-square" alt="Node.js Version" />
+  <img src="https://img.shields.io/badge/npm-v10.8.2-blue.svg?style=flat-square" alt="NPM Version" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT" />
+  <br />
+ <img src="https://img.shields.io/badge/contributions-welcome-orange.svg?style=flat-square" alt="Contributions Welcome" />
+ <a href="https://app.netlify.com/sites/ence-pence-nowa-huta/deploys">
+    <img src="https://img.shields.io/badge/Fly.io-Running-green" alt="Fly.io">
+  </a>
+</p>
 
-Run the dev server:
+# Stille 🐦
 
-```shellscript
-npm run dev
-```
+DESCRIPTION OF THE PROEJCT
 
-## Deployment
+- 🌐 [**Live Site**](https://stille-sewh8dpp1sfhhbxelxygac-staging.fly.dev/)
+- 🎨 [**Figma Design**](https://www.figma.com/design/cvFJXCo3gHwhHySu3OcEO6/Untitled?node-id=0-1&t=ehGdsTEz3caLATry-1)
 
-First, build your app for production:
+## Tech Stack 💻
+
+The project is built using the following modern technologies and tools:
+
+- **[Remix/React Router v7](https://reactrouter.com/home)**
+- **[Vite](https://vitejs.dev/)**
+- **[TypeScript](https://www.typescriptlang.org/)**
+- **[Tailwind CSS](https://tailwindcss.com/)**
+- **[Playwright](https://playwright.dev/)**
+- **[Storybook](https://storybook.js.org/)**
+
+## Getting Started 🚀
+
+Follow these steps to set up and run the project locally on your machine.
+
+### Prerequisites 📋
+
+Before starting, make sure you have the following tools installed:
+
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en/) - v20.18.0 or higher
+- [NVM](https://github.com/nvm-sh/nvm) - recommended
+- [NPM](https://www.npmjs.com/) - v10.8.2 or higher
+
+### Installation steps 🔧
+
+Fire up your terminal and run the following commands:
 
 ```sh
-npm run build
+# Clone the repository
+ git https://github.com/M-Kolacz/Stille.git
+# Navigate into the project directory:
+ cd stille
+# Switch to the correct Node version: (If using NVM)
+ nvm use
+# Install project dependencies:
+ npm install
+# Start the development server:
+ npm run dev
 ```
 
-Then run the app in production mode:
+Open the app in your browser: http://localhost:3000/.
 
-```sh
-npm start
-```
+## Contributing 🤝
 
-Now you'll need to pick a host to deploy it to.
+I welcome and appreciate all contributions! Whether it’s a small bug fix, new feature, or improvement suggestion, your help is valuable. Please read [Contributing Guidelines](./contributing.md) to get started.
 
-### DIY
+## License 📝
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+This project is licensed under the **MIT License**, which allows you to use, modify, and distribute the code freely. See the full license details in the [LICENSE](./LICENSE.md) file.
