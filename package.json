@@ -22,6 +22,7 @@
   "dependencies": {
     "@fontsource-variable/roboto-condensed": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
+    "@mdx-js/react": "^3.1.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@react-router/express": "^7.1.1",
     "@react-router/fs-routes": "^7.1.1",
@@ -43,6 +44,7 @@
     "helmet": "^8.0.0",
     "isbot": "^4.1.0",
     "lucide-react": "^0.453.0",
+    "mdx-bundler": "^10.1.0",
     "morgan": "^1.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
