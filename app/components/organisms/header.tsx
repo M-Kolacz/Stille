@@ -1,33 +1,39 @@
 import { Link } from "react-router";
-import { Button } from "#app/components/atoms";
+import { ThemeToggle } from "#app/components/theme-toggle.tsx";
 
 export const Header = () => {
   return (
-    <header className="bg-background border-b">
-      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">
-          MyWebDevBlog
+    <header className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-soft transition-colors duration-300">
+      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+        <Link
+          to="/"
+          className="text-2xl font-bold text-blue-800 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+        >
+          Michal Kolacz Blog
         </Link>
-        <nav>
-          <ul className="flex space-x-4">
-            <li>
-              <Link to="/blog" className="hover:underline">
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="hover:underline">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="hover:underline">
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <Button variant="outline">Subscribe</Button>
+        <div className="flex items-center gap-6">
+          <nav>
+            <ul className="flex gap-6">
+              <li>
+                <Link
+                  to="/"
+                  className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  Articles
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

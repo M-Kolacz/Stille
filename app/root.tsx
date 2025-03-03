@@ -21,6 +21,7 @@ import tailwindStylesheet from "./styles/tailwind.css?url";
 
 import { getEnv } from "./utils/env.server";
 import { GeneralErrorBoundary } from "./components/error-boundary";
+import { ThemeProvider } from "./components/theme-provider";
 
 export const meta: MetaFunction = () => [
   { name: "apple-mobile-web-app-title", content: "Stille" },
@@ -59,13 +60,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="flex flex-col min-h-screen">
-        <Header />
-        <main className="flex-grow container mx-auto px-4 py-8">
-          {children}
-        </main>
-        <Footer />
-        <ScrollRestoration getKey={(location) => location.pathname} />
-        <Scripts />
+        <ThemeProvider>
+          <Header />
+          <main className="flex-grow container mx-auto px-4 py-8">
+            {children}
+          </main>
+          <Footer />
+          <ScrollRestoration getKey={(location) => location.pathname} />
+          <Scripts />
+        </ThemeProvider>
       </body>
     </html>
   );
