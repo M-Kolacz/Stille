@@ -14,7 +14,7 @@ export default function Index() {
     <>
       <div className="max-w-3xl mx-auto py-12 md:py-20 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-blue-900 dark:text-blue-300 mb-6">
-          Welcome to Minimal Blog
+          Welcome to Michal Kolacz blog!
         </h1>
 
         <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 leading-relaxed">
@@ -32,7 +32,7 @@ export default function Index() {
             Here, we celebrate the power of simplicity and the beauty that
             emerges when we focus on what truly matters.
           </p>
-          <Link to="/articles">
+          <Link to="/blog">
             <Button size="lg" className="font-medium">
               Explore Articles
             </Button>

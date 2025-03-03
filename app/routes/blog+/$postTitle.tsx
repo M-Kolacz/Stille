@@ -9,7 +9,7 @@ export const meta: MetaFunction = ({ params }) => {
   const postTitle = params.postTitle;
 
   return [
-    { title: `${postTitle}` },
+    { title: `Stille | ${postTitle}` },
     { name: "description", content: `Stille blog post ${postTitle}` },
   ];
 };
@@ -71,13 +71,13 @@ export default function BlogPost() {
 
   return (
     <div className="max-w-3xl mx-auto py-12">
-      <Link to="/articles">
+      <Link to="/blog">
         <Button
           variant="ghost"
           className="mb-6 pl-0 flex items-center gap-1 text-blue-700 dark:text-blue-400"
         >
           <ArrowLeft size={16} />
-          Back to Articles
+          Back to Blog Posts
         </Button>
       </Link>
 

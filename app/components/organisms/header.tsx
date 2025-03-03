@@ -9,7 +9,7 @@ export const Header = () => {
           to="/"
           className="text-2xl font-bold text-blue-800 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
         >
-          Minimal Blog
+          Michal Kolacz Blog
         </Link>
         <div className="flex items-center gap-6">
           <nav>
