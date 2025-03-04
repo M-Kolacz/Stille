@@ -1,0 +1,55 @@
+name: 👷 Pull request workflow
+on:
+  pull_request: { branches: "*" }
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  lint:
+    name: 🔬 Linting & typecheck
+    runs-on: ubuntu-22.04
+    container:
+      image: mcr.microsoft.com/playwright
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@ec9e87262db2a1be2ca3ceb2d506c413a220542c
+
+      - name: 📘 Check types
+        run: npm run typecheck
+
+      - name: 📐 Lint code
+        run: npm run lint
+
+  build:
+    name: 🏗️ Build project
+    runs-on: ubuntu-22.04
+    needs: lint
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: 📥 Download deps
+        uses: bahmutov/npm-install@ec9e87262db2a1be2ca3ceb2d506c413a220542c
+
+      - name: 🏗️ Build project
+        run: npm run build
