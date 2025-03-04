@@ -50,9 +50,6 @@ export const loader = () => {
   };
 };
 
-const a =   "b";
-console.log(a)
-
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
