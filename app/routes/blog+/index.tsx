@@ -1,7 +1,7 @@
 import ArticleCard from "#app/components/article-card.tsx";
 import { useLoaderData, type MetaFunction } from "react-router";
 import { join } from "node:path";
-import { readFile } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import { bundleMDX } from "mdx-bundler";
 
 export const meta: MetaFunction = () => {
@@ -11,33 +11,41 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const getFolderNames = async (path: string) => {
+  const entries = await readdir(path, { withFileTypes: true });
+  const folders = entries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name);
+  return folders;
+};
+
 export const loader = async () => {
   const cwd = process.cwd();
 
-  const articlePath = join(
-    cwd,
-    "posts",
-    "getting-started-with-minimalism",
-    "index.mdx"
-  );
+  const names = await getFolderNames(join(cwd, "posts"));
 
-  const articleContent = await readFile(articlePath, "utf-8");
+  const articles = [];
 
-  const { frontmatter } = await bundleMDX<{
-    title: string;
-    date: string;
-    excerpt: string;
-  }>({
-    source: articleContent,
-  });
+  for (const directoryName of names) {
+    const articlePath = join(cwd, "posts", directoryName, "index.mdx");
+    const articleContent = await readFile(articlePath, "utf-8");
+    const { frontmatter } = await bundleMDX<{
+      title: string;
+      date: string;
+      excerpt: string;
+    }>({
+      source: articleContent,
+    });
+    const convertedFrontmatter = {
+      ...frontmatter,
+      slug: frontmatter.title.toLowerCase().split(" ").join("-"),
+    };
 
-  const convertedFrontmatter = {
-    ...frontmatter,
-    slug: frontmatter.title.toLowerCase().split(" ").join("-"),
-  };
+    articles.push(convertedFrontmatter);
+  }
 
   return {
-    articles: [convertedFrontmatter],
+    articles,
   };
 };
 
