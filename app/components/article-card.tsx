@@ -3,7 +3,7 @@ import { Button } from "#app/components/ui/button.tsx";
 import type { Article } from "#app/utils/data.ts";
 
 interface ArticleCardProps {
-  article: Article;
+  article: Omit<Article, "content">;
 }
 
 export default function ArticleCard({ article }: ArticleCardProps) {

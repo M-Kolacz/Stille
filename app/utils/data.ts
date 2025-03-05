@@ -1,5 +1,4 @@
 export type Article = {
-  id: string;
   title: string;
   slug: string;
   excerpt: string;
@@ -9,7 +8,6 @@ export type Article = {
 
 export const articles: Article[] = [
   {
-    id: "1",
     title: "Getting Started with Minimalism",
     slug: "getting-started-with-minimalism",
     excerpt:
@@ -36,7 +34,6 @@ export const articles: Article[] = [
     date: "2023-03-15",
   },
   {
-    id: "2",
     title: "The Art of Mindful Reading",
     slug: "the-art-of-mindful-reading",
     excerpt:
@@ -71,7 +68,6 @@ export const articles: Article[] = [
     date: "2023-04-22",
   },
   {
-    id: "3",
     title: "Finding Beauty in Simplicity",
     slug: "finding-beauty-in-simplicity",
     excerpt:

@@ -12,6 +12,8 @@ import { GeneralErrorBoundary } from "#app/components/error-boundary.tsx";
 import { bundleMDX } from "mdx-bundler";
 import { MDXProvider } from "@mdx-js/react";
 import { getMDXComponent } from "mdx-bundler/client";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const meta: MetaFunction = ({ params }) => {
   const postTitle = params.postTitle;
@@ -23,11 +25,18 @@ export const meta: MetaFunction = ({ params }) => {
 };
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const postTitle = params.postTitle!;
-  const article = getArticleBySlug(postTitle)!;
+  const cwd = process.cwd();
 
-  const { code } = await bundleMDX({
-    source: article.content,
+  const articlePath = join(cwd, "posts", params.postTitle!, "index.mdx");
+
+  const articleContent = await readFile(articlePath, "utf-8");
+
+  const { code } = await bundleMDX<{
+    title: string;
+    date: string;
+    excerpt: string;
+  }>({
+    source: articleContent,
   });
 
   return { code };
