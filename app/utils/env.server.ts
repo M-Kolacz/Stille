@@ -2,6 +2,7 @@ import { z } from "zod";
 
 const schema = z.object({
   NODE_ENV: z.enum(["production", "development", "test"] as const),
+  GITHUB_TOKEN: z.string(),
 });
 
 declare global {
