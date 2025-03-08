@@ -1,8 +1,8 @@
 import ArticleCard from "#app/components/article-card.tsx";
 import { useLoaderData, type MetaFunction } from "react-router";
 import { blogCache } from "#app/utils/cache.server.ts";
-import { bundleMDX } from "mdx-bundler";
-import { Octokit } from "@octokit/rest";
+import { Post } from "#app/types/blog.ts";
+import { getBlogPosts } from "#app/utils/blog.server.ts";
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,75 +12,33 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader = async () => {
-  if (blogCache.has("posts")) {
+  const cachedPosts = blogCache.get<Omit<Post, "code">[]>("posts");
+
+  if (cachedPosts)
     return {
-      articles: blogCache.get("posts"),
+      posts: cachedPosts,
     };
-  } else {
-    const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN,
-    });
-    const octokitResult = await octokit.repos.getContent({
-      owner: "M-Kolacz",
-      repo: "Stille",
-      path: "posts",
-    });
 
-    if (!(octokitResult.data instanceof Array)) {
-      throw new Response("No data returned from octokit", { status: 500 });
-    }
+  const posts = await getBlogPosts();
+  blogCache.set("posts", posts);
 
-    const postsNames = octokitResult.data.map((directory) => directory.name);
-
-    const posts = [];
-
-    for (const post of postsNames) {
-      const postResponse = await octokit.repos.getContent({
-        owner: "M-Kolacz",
-        repo: "Stille",
-        path: `posts/${post}/index.mdx`,
-      });
-
-      const postContent = Buffer.from(
-        postResponse.data.content,
-        "base64"
-      ).toString("utf-8");
-
-      const { frontmatter } = await bundleMDX<{
-        title: string;
-        date: string;
-        excerpt: string;
-      }>({
-        source: postContent,
-      });
-      const convertedFrontmatter = {
-        ...frontmatter,
-        slug: frontmatter.title.toLowerCase().split(" ").join("-"),
-      };
-
-      posts.push(convertedFrontmatter);
-    }
-
-    blogCache.set("posts", posts);
-
-    return {
-      articles: posts,
-    };
-  }
+  return {
+    posts,
+  };
 };
 
 export default function HomePage() {
-  const { articles } = useLoaderData<typeof loader>();
+  const { posts } = useLoaderData<typeof loader>();
 
   return (
     <>
       <div className="max-w-5xl mx-auto py-12">
         <h1 className="text-3xl md:text-4xl font-bold text-blue-900 mb-8">
-          Articles
+          Posts
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {articles.map((article) => (
+          {posts.map((article) => (
             <ArticleCard key={article.title} article={article} />
           ))}
         </div>

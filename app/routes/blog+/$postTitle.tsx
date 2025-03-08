@@ -1,19 +1,14 @@
-import {
-  Link,
-  LoaderFunctionArgs,
-  useLoaderData,
-  useParams,
-} from "react-router";
-import { getArticleBySlug } from "#app/utils/data.ts";
+import { Link, LoaderFunctionArgs, useLoaderData } from "react-router";
 import { Button } from "#app/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { type MetaFunction } from "react-router";
 import { GeneralErrorBoundary } from "#app/components/error-boundary.tsx";
-import { bundleMDX } from "mdx-bundler";
 import { MDXProvider } from "@mdx-js/react";
 import { getMDXComponent } from "mdx-bundler/client";
-import { Octokit } from "@octokit/rest";
 import { blogCache } from "#app/utils/cache.server.ts";
+import { getBlogPost } from "#app/utils/blog.server.ts";
+import { invariantResponse } from "#app/utils/invariant.ts";
+import { Post } from "#app/types/blog.ts";
 
 export const meta: MetaFunction = ({ params }) => {
   const postTitle = params.postTitle;
@@ -27,45 +22,21 @@ export const meta: MetaFunction = ({ params }) => {
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { postTitle } = params;
 
-  if (blogCache.has(`posts/${postTitle}`)) {
-    return { code: blogCache.get(`posts/${postTitle}`) };
-  } else {
-    const octokit = new Octokit({
-      auth: process.env.GITHUB_TOKEN,
-    });
-    const postResponse = await octokit.repos.getContent({
-      owner: "M-Kolacz",
-      repo: "Stille",
-      path: `posts/${postTitle}/index.mdx`,
-    });
+  invariantResponse(postTitle, "No post title provided", { status: 404 });
 
-    const postContent = Buffer.from(
-      postResponse.data.content,
-      "base64"
-    ).toString("utf-8");
+  const postCache = blogCache.get<Post>(`posts/${postTitle}`);
 
-    const { code } = await bundleMDX<{
-      title: string;
-      date: string;
-      excerpt: string;
-    }>({
-      source: postContent,
-    });
+  if (postCache) return postCache;
 
-    blogCache.set(`posts/${postTitle}`, code);
+  const post = await getBlogPost(postTitle);
 
-    return { code };
-  }
+  return post;
 };
 
 export default function BlogPost() {
-  const { code } = useLoaderData<typeof loader>();
-  const params = useParams();
-  const article = getArticleBySlug(params.postTitle!);
+  const { code, title, date } = useLoaderData<typeof loader>();
 
   const Component = getMDXComponent(code);
-
-  if (!article) return null;
 
   return (
     <MDXProvider>
@@ -83,10 +54,10 @@ export default function BlogPost() {
         <article className="bg-white dark:bg-slate-900 rounded-lg shadow-soft p-8 md:p-12 transition-colors duration-300">
           <header className="mb-8 border-b border-slate-100 dark:border-slate-800 pb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-blue-900 dark:text-blue-300 mb-3">
-              {article.title}
+              {title}
             </h1>
             <p className="text-slate-500 dark:text-slate-400">
-              {new Date(article.date).toLocaleDateString("en-US", {
+              {new Date(date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
