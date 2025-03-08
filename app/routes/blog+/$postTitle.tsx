@@ -12,8 +12,8 @@ import { GeneralErrorBoundary } from "#app/components/error-boundary.tsx";
 import { bundleMDX } from "mdx-bundler";
 import { MDXProvider } from "@mdx-js/react";
 import { getMDXComponent } from "mdx-bundler/client";
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { Octokit } from "@octokit/rest";
+import { blogCache } from "#app/utils/cache.server.ts";
 
 export const meta: MetaFunction = ({ params }) => {
   const postTitle = params.postTitle;
@@ -25,21 +25,37 @@ export const meta: MetaFunction = ({ params }) => {
 };
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
-  const cwd = process.cwd();
+  const { postTitle } = params;
 
-  const articlePath = join(cwd, "posts", params.postTitle!, "index.mdx");
+  if (blogCache.has(`posts/${postTitle}`)) {
+    return { code: blogCache.get(`posts/${postTitle}`) };
+  } else {
+    const octokit = new Octokit({
+      auth: process.env.GITHUB_TOKEN,
+    });
+    const postResponse = await octokit.repos.getContent({
+      owner: "M-Kolacz",
+      repo: "Stille",
+      path: `posts/${postTitle}/index.mdx`,
+    });
 
-  const articleContent = await readFile(articlePath, "utf-8");
+    const postContent = Buffer.from(
+      postResponse.data.content,
+      "base64"
+    ).toString("utf-8");
 
-  const { code } = await bundleMDX<{
-    title: string;
-    date: string;
-    excerpt: string;
-  }>({
-    source: articleContent,
-  });
+    const { code } = await bundleMDX<{
+      title: string;
+      date: string;
+      excerpt: string;
+    }>({
+      source: postContent,
+    });
 
-  return { code };
+    blogCache.set(`posts/${postTitle}`, code);
+
+    return { code };
+  }
 };
 
 export default function BlogPost() {

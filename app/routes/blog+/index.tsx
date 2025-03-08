@@ -1,8 +1,8 @@
 import ArticleCard from "#app/components/article-card.tsx";
 import { useLoaderData, type MetaFunction } from "react-router";
-import { join } from "node:path";
-import { readdir, readFile } from "node:fs/promises";
+import { blogCache } from "#app/utils/cache.server.ts";
 import { bundleMDX } from "mdx-bundler";
+import { Octokit } from "@octokit/rest";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,42 +11,62 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-const getFolderNames = async (path: string) => {
-  const entries = await readdir(path, { withFileTypes: true });
-  const folders = entries
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name);
-  return folders;
-};
-
 export const loader = async () => {
-  const cwd = process.cwd();
-
-  const names = await getFolderNames(join(cwd, "posts"));
-
-  const articles = [];
-
-  for (const directoryName of names) {
-    const articlePath = join(cwd, "posts", directoryName, "index.mdx");
-    const articleContent = await readFile(articlePath, "utf-8");
-    const { frontmatter } = await bundleMDX<{
-      title: string;
-      date: string;
-      excerpt: string;
-    }>({
-      source: articleContent,
-    });
-    const convertedFrontmatter = {
-      ...frontmatter,
-      slug: frontmatter.title.toLowerCase().split(" ").join("-"),
+  if (blogCache.has("posts")) {
+    return {
+      articles: blogCache.get("posts"),
     };
+  } else {
+    const octokit = new Octokit({
+      auth: process.env.GITHUB_TOKEN,
+    });
+    const octokitResult = await octokit.repos.getContent({
+      owner: "M-Kolacz",
+      repo: "Stille",
+      path: "posts",
+    });
 
-    articles.push(convertedFrontmatter);
+    if (!(octokitResult.data instanceof Array)) {
+      throw new Response("No data returned from octokit", { status: 500 });
+    }
+
+    const postsNames = octokitResult.data.map((directory) => directory.name);
+
+    const posts = [];
+
+    for (const post of postsNames) {
+      const postResponse = await octokit.repos.getContent({
+        owner: "M-Kolacz",
+        repo: "Stille",
+        path: `posts/${post}/index.mdx`,
+      });
+
+      const postContent = Buffer.from(
+        postResponse.data.content,
+        "base64"
+      ).toString("utf-8");
+
+      const { frontmatter } = await bundleMDX<{
+        title: string;
+        date: string;
+        excerpt: string;
+      }>({
+        source: postContent,
+      });
+      const convertedFrontmatter = {
+        ...frontmatter,
+        slug: frontmatter.title.toLowerCase().split(" ").join("-"),
+      };
+
+      posts.push(convertedFrontmatter);
+    }
+
+    blogCache.set("posts", posts);
+
+    return {
+      articles: posts,
+    };
   }
-
-  return {
-    articles,
-  };
 };
 
 export default function HomePage() {
