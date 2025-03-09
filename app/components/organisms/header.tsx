@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { ThemeToggle } from "#app/components/theme-toggle.tsx";
 
 export const Header = () => {
   return (
@@ -9,30 +8,21 @@ export const Header = () => {
           to="/"
           className="text-2xl font-bold text-blue-800 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
         >
-          Michal Kolacz Blog
+          Michal Kolacz
         </Link>
         <div className="flex items-center gap-6">
           <nav>
             <ul className="flex gap-6">
               <li>
                 <Link
-                  to="/"
-                  className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
                   to="/blog"
                   className="text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                 >
-                  Articles
+                  Blog
                 </Link>
               </li>
             </ul>
           </nav>
-          <ThemeToggle />
         </div>
       </div>
     </header>
