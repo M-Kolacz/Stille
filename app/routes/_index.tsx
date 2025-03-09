@@ -1,6 +1,8 @@
-import { type MetaFunction } from "react-router";
-import { Button } from "#app/components/ui/button";
-import { Link } from "react-router";
+import { Link, type MetaFunction } from "react-router";
+import { Github, Linkedin, X } from "lucide-react";
+import { Button } from "#app/components/ui/button.tsx";
+
+import meSrc from "#app/assets/me.avif?url";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,62 +13,80 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <>
-      <div className="max-w-3xl mx-auto py-12 md:py-20 text-center">
-        <h1 className="text-4xl md:text-6xl font-bold text-blue-900 dark:text-blue-300 mb-6">
-          Welcome to Michal Kolacz blog!
-        </h1>
-
-        <p className="text-xl text-slate-700 dark:text-slate-300 mb-8 leading-relaxed">
-          A clean, thoughtful space for ideas that matter. Focused on
-          simplicity, clarity, and the beauty of well-crafted words.
-        </p>
-
-        <div className="bg-white dark:bg-slate-900 p-8 md:p-12 rounded-lg shadow-soft mb-12 transition-colors duration-300">
-          <h2 className="text-2xl md:text-3xl font-semibold text-blue-800 dark:text-blue-400 mb-4">
-            About This Blog
-          </h2>
-          <p className="text-slate-700 dark:text-slate-300 mb-6">
-            This minimalist blog explores ideas around intentional living,
-            thoughtful design, and the pursuit of clarity in a complex world.
-            Here, we celebrate the power of simplicity and the beauty that
-            emerges when we focus on what truly matters.
+    <section className="container mx-auto px-4 py-20 md:py-32">
+      <div className="max-w-3xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-16">
+          <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+            <img
+              src={meSrc}
+              alt="Profile"
+              width={128}
+              height={128}
+              className="object-center object-cover w-32 h-32"
+            />
+          </div>
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Michal Kolacz
+            </h1>
+            <h2 className="text-xl md:text-2xl text-[#0047AB] font-medium mb-6">
+              Software Engineer
+            </h2>
+            <div className="flex space-x-4">
+              <a
+                href="https://github.com/M-Kolacz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#0047AB] transition-colors"
+              >
+                <Github className="w-5 h-5" />
+                <span className="sr-only">GitHub</span>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/m-kolacz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#0047AB] transition-colors"
+              >
+                <Linkedin className="w-5 h-5" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+              <a
+                href="https://x.com/M_Kolacz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-[#0047AB] transition-colors"
+              >
+                <X className="w-5 h-5" />
+                <span className="sr-only">Twitter</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg text-gray-700 mb-6">
+            I&apos;m a passionate software engineer with over 5 years of
+            experience building web applications. I specialize in both frontend
+            and backend technologies, with a focus on creating performant,
+            accessible, and user-friendly experiences.
           </p>
-          <Link to="/blog">
-            <Button size="lg" className="font-medium">
-              Explore Articles
-            </Button>
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-          <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg border border-blue-100 dark:border-blue-900 transition-colors duration-300">
-            <h3 className="text-lg font-medium text-blue-800 dark:text-blue-400 mb-2">
-              Minimalism
-            </h3>
-            <p className="text-slate-700 dark:text-slate-300">
-              Exploring the power of less and the freedom it brings to our
-              lives.
-            </p>
-          </div>
-          <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg border border-blue-100 dark:border-blue-900 transition-colors duration-300">
-            <h3 className="text-lg font-medium text-blue-800 dark:text-blue-400 mb-2">
-              Mindfulness
-            </h3>
-            <p className="text-slate-700 dark:text-slate-300">
-              Practicing presence and awareness in our daily experiences.
-            </p>
-          </div>
-          <div className="bg-blue-50 dark:bg-blue-950 p-6 rounded-lg border border-blue-100 dark:border-blue-900 transition-colors duration-300">
-            <h3 className="text-lg font-medium text-blue-800 dark:text-blue-400 mb-2">
-              Design
-            </h3>
-            <p className="text-slate-700 dark:text-slate-300">
-              Appreciating the beauty of thoughtful, purposeful creation.
-            </p>
-          </div>
+          <p className="text-lg text-gray-700 mb-6">
+            My expertise includes React, Next.js, Node.js, and TypeScript.
+            I&apos;m passionate about clean code, thoughtful architecture, and
+            creating solutions that solve real problems.
+          </p>
+
+          <p className="text-lg text-gray-700">
+            Currently, I&apos;m working on improving web performance and
+            accessibility standards while exploring new technologies that can
+            enhance the developer and user experience.
+          </p>
         </div>
+        <Link to="/blog">
+          <Button className="mt-8">Check blog</Button>
+        </Link>
       </div>
-    </>
+    </section>
   );
 }
