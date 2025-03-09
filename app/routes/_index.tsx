@@ -65,22 +65,10 @@ export default function Index() {
         </div>
         <div className="prose prose-lg max-w-none">
           <p className="text-lg text-gray-700 mb-6">
-            I&apos;m a passionate software engineer with over 5 years of
-            experience building web applications. I specialize in both frontend
-            and backend technologies, with a focus on creating performant,
-            accessible, and user-friendly experiences.
-          </p>
-
-          <p className="text-lg text-gray-700 mb-6">
-            My expertise includes React, Next.js, Node.js, and TypeScript.
-            I&apos;m passionate about clean code, thoughtful architecture, and
-            creating solutions that solve real problems.
-          </p>
-
-          <p className="text-lg text-gray-700">
-            Currently, I&apos;m working on improving web performance and
-            accessibility standards while exploring new technologies that can
-            enhance the developer and user experience.
+            Hey 👋 I`m software enginner who wants to share his knowledge and
+            opinions about web development. I have a experience in creating
+            products using React, Typescript and Node.js. Also I am big fan of
+            Remix (currently React Router v7).
           </p>
         </div>
         <Link to="/blog">
