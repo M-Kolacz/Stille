@@ -14,8 +14,8 @@ export const meta: MetaFunction = ({ params }) => {
   const postTitle = params.postTitle;
 
   return [
-    { title: `Stille | ${postTitle}` },
-    { name: "description", content: `Stille blog post ${postTitle}` },
+    { title: `michalkolacz.com | ${postTitle}` },
+    { name: "description", content: `michalkolacz.com blog post ${postTitle}` },
   ];
 };
 

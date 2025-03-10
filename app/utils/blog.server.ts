@@ -6,7 +6,7 @@ import { blogCache } from "#app/utils/cache.server.ts";
 export const getBlogPosts = async () => {
   const octokitResult = await octokit.repos.getContent({
     owner: "M-Kolacz",
-    repo: "Stille",
+    repo: "michalkolacz.com",
     path: "posts",
   });
 
@@ -25,7 +25,7 @@ export const getBlogPosts = async () => {
   for (const post of postsNames) {
     const postResponse = await octokit.repos.getContent({
       owner: "M-Kolacz",
-      repo: "Stille",
+      repo: "michalkolacz.com",
       path: `posts/${post}/index.mdx`,
     });
 
@@ -62,7 +62,7 @@ export const getBlogPosts = async () => {
 export const getBlogPost = async (postSlug: string) => {
   const postResponse = await octokit.repos.getContent({
     owner: "M-Kolacz",
-    repo: "Stille",
+    repo: "michalkolacz.com",
     path: `posts/${postSlug}/index.mdx`,
   });
 
