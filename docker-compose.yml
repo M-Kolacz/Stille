@@ -1,5 +1,5 @@
 services:
-  stille:
+  web:
     build:
       context: ./
       args:

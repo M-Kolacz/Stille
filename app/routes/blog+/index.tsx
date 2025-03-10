@@ -6,8 +6,8 @@ import { getBlogPosts } from "#app/utils/blog.server.ts";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Stille | Blog" },
-    { name: "description", content: "Stille blog" },
+    { title: "michalkolacz.com | Blog" },
+    { name: "description", content: "michalkolacz.com blog" },
   ];
 };
 

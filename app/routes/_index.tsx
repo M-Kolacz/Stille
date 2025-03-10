@@ -6,8 +6,8 @@ import meSrc from "#app/assets/me.avif?url";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Stille" },
-    { name: "description", content: "Welcome to Stille!" },
+    { title: "michalkolacz.com" },
+    { name: "description", content: "Welcome to michalkolacz.com!" },
   ];
 };
 

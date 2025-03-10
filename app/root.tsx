@@ -23,7 +23,7 @@ import { getEnv } from "./utils/env.server";
 import { GeneralErrorBoundary } from "./components/error-boundary";
 
 export const meta: MetaFunction = () => [
-  { name: "apple-mobile-web-app-title", content: "Stille" },
+  { name: "apple-mobile-web-app-title", content: "michalkolacz.com" },
 ];
 
 export const links: LinksFunction = () => [
