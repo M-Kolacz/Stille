@@ -29,6 +29,8 @@ jobs:
 
       - name: 🏗️ Build project
         run: npm run build
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: 📘 Check types
         run: npm run typecheck
