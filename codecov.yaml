@@ -1,0 +1,6 @@
+# codecov.yaml
+bundle_analysis:
+# Inform me about any bundle size changes that increase
+# the 5% of total current bundle size of my app.
+warning_threshold: "5%"
+status: "informational"
